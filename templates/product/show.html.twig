@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block stylesheets %}
+			
+{% endblock %}
+
+{% block body %}
+
+<h1>Mon article</h1>
+<hr>
+
+
+<div class= "mx-auto">
+    <div class="card" style="width: 30rem;">
+        <img class="card-img-top" src="/images/{{product.illustration}}" alt="{{product.name}}">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text desc">{{product.subtitle}}</p>
+        </div>
+            <p>{{ product.description}}</p>
+        <span class="d-flex justify-content-between ">
+            <a href="" class="btn btn-danger">Ajouter au panier</a>
+            <strong><p>{{ (product.price / 100)|number_format(2, ',', '.') }}€</p></strong>
+        </span>
+    </div>
+</div>
+
+
+<a href="{{ path('product') }}" class="btn btn-secondary ">Retour aux produits</a>
+
+<hr>
+
+{% endblock %}
