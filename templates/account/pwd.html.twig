@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+
+
+<h1>Chagements MDP</h1>
+
+<hr>
+
+{% if notification %}
+<div class="alert alert-info" role="alert">
+    {{notification}}
+</div>
+{% endif %}
+
+{{ form(formulaire) }}
+
+<a href="{{ path('account')}}">Retour sur mon compte</a>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La boutioque du greta{% endblock %}
+
+{% block body %}
+<h1>Bienvenue <strong>{{app.user.firstName}} {{app.user.lastName}}</strong> </h1>
+
+<h2>espace Perso</h2>
+<hr>
+<ul>
+    <li><a href="{{ path('account_pwd')}}">Modifier le mot de passe</a></li>
+    <li>Ajouter adresse</li>
+    <li>Historique mes commandes</li>
+</ul>
+{% endblock %}
