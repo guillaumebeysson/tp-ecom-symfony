@@ -1,7 +1,45 @@
 .card {
 	margin: 10px auto !important;
 	padding: 5px;
+	border: solid 1px rgb(255, 187, 0);
+	transition: all 0.3s;
+}
+.card:hover {
+	box-shadow: 0 0 1em grey;
+	transform: scale(1.05);
+}
+#navbarCollapse a {
+	text-decoration: none;
+	color: white;
 }
 .btn-secondary {
 	margin: 0 auto !important;
+}
+.card-body h5{
+	text-align: center;
+}
+.fa-trash-alt{
+	color: crimson;
+}
+.fa-trash-alt:hover{
+	cursor: pointer;
+}
+th{
+	text-align: center;
+	vertical-align: middle;
+}
+td{
+	text-align: center;
+	vertical-align: middle;
+}
+.panier-vide h2{
+	text-align: center;
+}
+.panier-vide {
+	text-align: center;
+	font-size: 3em;
+}
+.ajouter-panier:hover{
+	color: black;
+	background-color: rgba(255, 255, 255, 0);
 }

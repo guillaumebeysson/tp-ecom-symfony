@@ -21,7 +21,7 @@
         </div>
             <p>{{ product.description}}</p>
         <span class="d-flex justify-content-between ">
-            <a href="" class="btn btn-danger">Ajouter au panier</a>
+            <a href="{{ path("add_cart", {'id' : product.id}) }}" class="btn btn-dark ajouter-panier">Ajouter au panier</a>
             <strong><p>{{ (product.price / 100)|number_format(2, ',', '.') }}€</p></strong>
         </span>
     </div>
