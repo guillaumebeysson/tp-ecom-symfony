@@ -1,3 +1,13 @@
+body {
+	position: relative !important;
+	min-height: 100vh;
+}
+footer {
+	position: absolute;
+	bottom: 0;
+	min-width: 100%;
+}
+
 .card {
 	margin: 10px auto !important;
 	padding: 5px;
@@ -6,7 +16,17 @@
 }
 .card:hover {
 	box-shadow: 0 0 1em grey;
-	transform: scale(1.05);
+	transform: scale(1.03);
+}
+.card-address {
+	margin: 10px auto !important;
+	padding: 5px;
+	border: solid 1px #2a2a2a;
+	transition: all 0.3s;
+}
+.card-address:hover {
+	box-shadow: 0 0 1em grey;
+	transform: scale(1.03);
 }
 #navbarCollapse a {
 	text-decoration: none;
@@ -15,31 +35,70 @@
 .btn-secondary {
 	margin: 0 auto !important;
 }
-.card-body h5{
+.card-body h5 {
 	text-align: center;
 }
-.fa-trash-alt{
+.fa-trash-alt {
 	color: crimson;
 }
-.fa-trash-alt:hover{
+.fa-trash-alt:hover {
 	cursor: pointer;
 }
-th{
+th {
 	text-align: center;
 	vertical-align: middle;
 }
-td{
+td {
 	text-align: center;
 	vertical-align: middle;
 }
-.panier-vide h2{
+.panier-vide h2 {
 	text-align: center;
 }
 .panier-vide {
 	text-align: center;
 	font-size: 3em;
 }
-.ajouter-panier:hover{
+.ajouter-panier:hover {
 	color: black;
 	background-color: rgba(255, 255, 255, 0);
+}
+.quantity-plus-minus a {
+	margin: 0 5px;
+}
+#add_address {
+	background-color: #2a2a2a;
+	text-decoration: none;
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+	border: solid 1px white;
+	transition: all 0.3s;
+}
+#add_address:hover {
+	background-color: #fafafa;
+	color: #2a2a2a;
+	border: solid 1px #2a2a2a;
+}
+.valider-adresse {
+	text-align: center;
+}
+.form-group button {
+	color: white;
+	background-color: #2a2a2a;
+	border: solid 1px #2a2a2a;
+	transition: all 0.3s;
+}
+.form-group button:hover {
+	color: #2a2a2a;
+	background-color: white;
+	border: solid 1px #2a2a2a;
+}
+.buttons-modif-suprr {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.buttons-modif-suprr .fa-trash-alt {
+	color: #fafafa;
 }

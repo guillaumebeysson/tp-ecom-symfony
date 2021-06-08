@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Address;
 use App\Entity\Product;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,10 +34,13 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Gestion Utilisateur');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user-secret', User::class);
+        yield MenuItem::linkToCrud('Adresses', 'fas fa-map-marker-alt', Address::class);
 
         yield MenuItem::section('Boutique');
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Produits', 'fas fa-tag', Product::class);
+
+        
 
     }
 }

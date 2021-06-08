@@ -18,8 +18,15 @@ class CartController extends AbstractController
         //Je crée une variable 'fullInfoProduct'
         $fullInfoProduct = [];
         foreach ($cart->get() as $id => $quantity) {
+            $product = $repo->findOneById($id);
+
+            //si aucun produit n'existe, continu
+            if(!$product){
+                continue;
+            }
+
             $fullInfoProduct[] = [ 
-                'product' => $repo->findOneById($id),
+                'product' => $product,
                 'quantity' => $quantity,
             ];
         }
