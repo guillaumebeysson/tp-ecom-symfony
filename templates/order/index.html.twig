@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recap de ma commande{% endblock %}
+
+{% block body %}
+
+<h1>Récapitulation de ma commande</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Choisir le transporteur</p>
+        <p>Choisir l'adresse de livraison</p>
+        {{ form(form) }}
+    </div>
+    <div class="col-md-6">
+        <p>Détail de ma commande</p>
+        <p>Payer</p>
+    </div>
+</div>
+
+{% endblock %}
