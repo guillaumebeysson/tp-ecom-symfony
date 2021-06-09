@@ -32,6 +32,11 @@ class Carrier
      */
     private $price;
 
+    public function __toString()
+    {
+        return $this->getName(). '%br%' .$this->getDescription(). '%br%' .$this->getPrice();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

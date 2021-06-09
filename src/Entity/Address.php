@@ -68,10 +68,9 @@ class Address
      */
     private $user;
 
-
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName(). '%br%' .$this->getAddress(). '%br%' .$this->getPostalCode(). ' - ' .$this->getCity();
     }
 
     public function getId(): ?int

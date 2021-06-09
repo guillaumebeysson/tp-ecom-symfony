@@ -102,3 +102,18 @@ td {
 .buttons-modif-suprr .fa-trash-alt {
 	color: #fafafa;
 }
+
+.btn-pay {
+	width: 100%;
+	/* display: block;
+	margin: 0 auto; */
+}
+.col-form-label {
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+#details-command {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}

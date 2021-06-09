@@ -57,7 +57,9 @@
         <p>Total de mon panier: {{ (total / 100)|number_format(2, ',', '.') }}€</p>
     </div>
     <div class="text-center">
-        <button class="btn btn-success">Valider mon panier</button>
+        <a href="{{ path('order') }}">
+        <button class="btn btn-success"> Valider mon panier</button>
+        </a> 
     </div>
 </section>
 {% else %}

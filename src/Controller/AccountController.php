@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Session\Cart;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Form\ChangePasswordType;
@@ -73,7 +74,7 @@ class AccountController extends AbstractController
     /**
      * @Route("/account/address/add", name="account_add_address")
      */
-    public function adddressAdd(Request $request, EntityManagerInterface $em): Response
+    public function adddressAdd(Request $request, EntityManagerInterface $em, Cart $cart): Response
     {
         $address = new Address();
 
@@ -86,6 +87,9 @@ class AccountController extends AbstractController
             $address->setUser($this->getUser());
             $em->persist($address);
             $em->flush();
+            if($cart->get()){
+                return $this->redirectToRoute("order");
+            }
             return $this->redirectToRoute('account_address');
         }
 
@@ -113,6 +117,7 @@ class AccountController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($address);
             $em->flush();
+            
             return $this->redirectToRoute("account_address");
         }
 
