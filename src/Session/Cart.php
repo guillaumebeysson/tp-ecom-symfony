@@ -32,8 +32,8 @@ class Cart {
     }
 
     public function get() {
-        // permet de récupérer ma session cart
-        return $this->session->get('cart');
+        // permet de récupérer ma session cart, ?? Null safe operator (si ca vaut null, tu renvoies ce qui a apres)
+        return $this->session->get('cart') ?? [];
     }
 
     public function decrease($id){

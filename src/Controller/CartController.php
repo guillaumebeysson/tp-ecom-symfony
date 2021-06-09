@@ -15,6 +15,7 @@ class CartController extends AbstractController
      */
     public function index(Cart $cart, ProductRepository $repo): Response
     {
+
         //Je crée une variable 'fullInfoProduct'
         $fullInfoProduct = [];
         foreach ($cart->get() as $id => $quantity) {

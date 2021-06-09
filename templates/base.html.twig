@@ -51,6 +51,7 @@
 							{% if app.user %}
 								<a href="{{ path("account") }}"><i class="fas fa-user-tie"></i> <small>( {{ app.user.firstName }} )</small> </a>
 								<a href="{{ path('app_logout') }}">Déconnexion</a>
+								<a href="{{ path("cart") }}"><i class="fas fa-shopping-cart"></i></a>
 								{% else %}
 								<a href="{{ path("app_login") }}">Connexion</a>
 								<a href="{{ path("user") }}">Inscription</a>
