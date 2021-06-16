@@ -2,6 +2,12 @@
 
 {% block title %}Valider ma commande{% endblock %}
 
+{% block javascripts %}
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
 {% block body %}
     <h1>Récapitulation de la commande</h1>
     <p>Préférence de livraison</p>
@@ -40,10 +46,17 @@
             <div>Livraison: {{ deliverer.price }}€</div>
             <hr />
             <div>Total: {{ (total/100 + deliverer.price)|number_format(2, ',', '.')  }}€</div>
-            <a href="" class="btn btn-success mt-3">Payer |  {{ (total/100 + deliverer.price)|number_format(2, ',', '.')  }}€</a>
+            <button class="btn btn-success mt-3" id="checkout-button">Payer |  {{ (total/100 + deliverer.price)|number_format(2, ',', '.')  }}€</button>
         </div>
     </div>
     
+    
+    <script src="{{ asset("assets/js/stripe.js") }}"></script>
+    
+
+
 {% endblock %}
+
+
 
 

@@ -62,4 +62,26 @@ class Cart {
         return $this->session->remove('cart');
     }
 
+
+    public function getFullInfoProduct(){
+
+        $fullInfoProduct = [];
+            foreach ($cart->get() as $id => $quantity) {
+                $product = $repo->findOneById($id);
+
+                //si aucun produit n'existe, continu
+                if(!$product){
+                    continue;
+                }
+
+                $fullInfoProduct[] = [ 
+                    'product' => $product,
+                    'quantity' => $quantity,
+                ];
+            }
+
+        return $fullInfoProduct;
+
+    } 
+
 }

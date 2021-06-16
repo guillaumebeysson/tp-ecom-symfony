@@ -49,7 +49,7 @@ class OrderController extends AbstractController
     }
 
     /**
-     * @Route("/order/recap", name="order_recap")
+     * @Route("/order/recap", name="order_recap", methods="POST")
      */
     public function recap(Request $request, Cart $cart, ProductRepository $repo, EntityManagerInterface $em): Response
     {
@@ -106,20 +106,20 @@ class OrderController extends AbstractController
 
             
             //Je crée une variable 'fullInfoProduct'
-        $fullInfoProduct = [];
-        foreach ($cart->get() as $id => $quantity) {
-            $product = $repo->findOneById($id);
+            $fullInfoProduct = [];
+            foreach ($cart->get() as $id => $quantity) {
+                $product = $repo->findOneById($id);
 
-            //si aucun produit n'existe, continu
-            if(!$product){
-                continue;
+                //si aucun produit n'existe, continu
+                if(!$product){
+                    continue;
+                }
+
+                $fullInfoProduct[] = [ 
+                    'product' => $product,
+                    'quantity' => $quantity,
+                ];
             }
-
-            $fullInfoProduct[] = [ 
-                'product' => $product,
-                'quantity' => $quantity,
-            ];
-        }
 
             
             
@@ -135,15 +135,16 @@ class OrderController extends AbstractController
             }
 
             $em->flush();
-
+            
+            return $this->render('order/recap.html.twig', [
+                'cart' => $fullInfoProduct,
+                'deliverer' => $deliverer,
+                'delivery' => $addressDelivery,
+            ]);
         }
 
         // $form = $this->createForm(OrderType::class);
+        return $this->redirectToRoute('cart');
 
-        return $this->render('order/recap.html.twig', [
-            'cart' => $fullInfoProduct,
-            'deliverer' => $deliverer,
-            'delivery' => $addressDelivery,
-        ]);
     }
 }

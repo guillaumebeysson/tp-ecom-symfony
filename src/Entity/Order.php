@@ -56,6 +56,17 @@ class Order
      */
     private $isPaid;
 
+    public function getTotal(): ?float
+    {
+        $total = null;
+
+        foreach ($this->getOrderDetails() as $product) {
+            $total = $total + $product->getTotal();
+        }
+
+        return $total;
+    }
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
