@@ -6,6 +6,7 @@ use App\Entity\Order;
 use App\Session\Cart;
 use App\Form\OrderType;
 use App\Entity\OrderDetails;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,6 +79,10 @@ class OrderController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             
             $date = new \DateTime();
+
+            /*Je crée une référence unique */
+            $reference = $date->format('dmY').'-'. uniqid();
+
             $deliverer = $form->get("carrier")->getData();
             $delivery = $form->get("address")->getData();
 
@@ -96,11 +101,11 @@ class OrderController extends AbstractController
             $order = new Order();
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
-
             $order->setDeliverer($deliverer->getName());
             $order->setDelivererPrice($deliverer->getPrice());
             $order->setDeliveryAddress($addressDelivery);
             $order->setIsPaid(0);
+            $order->setReference($reference);
 
             $em->persist($order);
 
@@ -140,11 +145,57 @@ class OrderController extends AbstractController
                 'cart' => $fullInfoProduct,
                 'deliverer' => $deliverer,
                 'delivery' => $addressDelivery,
+                'reference' =>$reference,
             ]);
         }
 
         // $form = $this->createForm(OrderType::class);
         return $this->redirectToRoute('cart');
 
+    }
+
+    /**
+     * @Route("/order/success/{stripeId}", name="order_success")
+     */
+
+     public function success($stripeId, OrderRepository $repo, EntityManagerInterface $em){
+
+        $order = $repo->findOneByStripeSessionId($stripeId);
+
+        if(!$order || $order->getUser() != $this->getUser()){
+            return $this->redirectToRoute('home');
+        }
+
+        /**Si ma commande n'est pas payée alors je peux */
+        if(!$order->getIsPaid()){
+            // changer son status et passer en "Payé"
+            $order->setIsPaid(1);
+            $em->persist($order);
+            // et j'enregistre en BDD
+            $em->flush();
+        }
+
+         return $this->render("order/success.html.twig", [
+             'order' => $order,
+         ]);
+     }
+
+
+      /**
+     * @Route("/order/cancel/{stripeId}", name="order_cancel")
+     */
+
+    public function cancel($stripeId, OrderRepository $repo){
+
+        $order = $repo->findOneByStripeSessionId($stripeId);
+
+        if(!$order || $order->getUser() != $this->getUser()){
+            return $this->redirectToRoute('home');
+        }
+
+
+         return $this->render("order/cancel.html.twig", [
+             'order' => $order,
+         ]);
     }
 }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recap de ma commande{% endblock %}
+
+{% block body %}
+
+<h1>Commande payée</h1>
+
+<hr>
+
+<div class="commande-payee">
+    <p>Merci d'avoir passée une commande <strong>{{ app.user.firstName }}</strong>.</p>
+    <p>Référence: <strong> {{ order.reference }}</strong>.</p>
+    <p>Commande livrée par <strong>{{ order.deliverer }}</strong>.</p>
+    <p>Adresse de livraison: <br> <strong>{{ order.deliveryAddress|raw }}</strong> </p>
+    <div>
+        Commande enregistrée dans votre <a href="">Espace Personnel</a>  .
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
