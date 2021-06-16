@@ -6,6 +6,7 @@ use App\Session\Cart;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Form\ChangePasswordType;
+use App\Repository\OrderRepository;
 use App\Repository\AddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -141,6 +142,19 @@ class AccountController extends AbstractController
             return $this->redirectToRoute("account_address");
         }
         return $this->redirectToRoute('account_address');
+
+    }
+    
+    /**
+     * @Route("/account/historical", name="account_historical")
+     */
+    public function historical(OrderRepository $repo){
+
+        $orders = $repo->findSuccessOrders($this->getUser());
+
+        return $this->render('account/historical.html.twig', [
+            'orders' => $orders,
+        ]);
 
     }
 }

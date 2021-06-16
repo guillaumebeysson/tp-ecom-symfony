@@ -14,7 +14,7 @@
     <p>Commande livrée par <strong>{{ order.deliverer }}</strong>.</p>
     <p>Adresse de livraison: <br> <strong>{{ order.deliveryAddress|raw }}</strong> </p>
     <div>
-        Commande enregistrée dans votre <a href="">Espace Personnel</a>  .
+        Commande enregistrée dans votre <a href="{{ path("account_historical") }}">Espace Personnel</a>  .
     </div>
 
 </div>

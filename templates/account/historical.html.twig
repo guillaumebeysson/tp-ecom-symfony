@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique de mes Commandes{% endblock %}
+
+{% block body %}
+
+<h1>Historique de mes Commandes</h1>
+<h2>Dashboard de vos adresses</h2>
+<hr>
+
+
+<div class="row">
+
+{% if orders | length == 0 %}
+    <p>Aucune commande passée</p>
+    <p>Voir les <a href="{{ path("products") }}">produits</a> de la boutique</p>
+{% endif %}
+
+
+<div class="row">
+
+    <table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">Référence</th>
+        <th scope="col">Date de la commande</th>
+        <th scope="col">Nombre de produit</th>
+        <th scope="col">Total</th>
+        <th scope="col">Détails</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr>
+        <th scope="row">{{ order.reference }}</th>
+        <td>{{ order.createdAt | date("d/m/Y H:i") }}</td>
+        <td>{{ order.orderDetails | length }}</td>
+        <td>{{ (((order.delivererPrice * 100) + order.getTotal) /100) |number_format(2, ',', '.') }} €</td>
+        <td>
+            <a href=""><i class="far fa-eye"></i></a>
+        </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+</div>
+
+    
+        
+    
+
+</div>
+
+{% endblock %}

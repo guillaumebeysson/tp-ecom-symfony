@@ -58,7 +58,7 @@ class StripeController extends AbstractController
                     'images' => ['https://via.placeholder.com/150'],
                 ],
             ],
-            'quantity' => $product->getQuantity(),
+            'quantity' => 1,
         ];
 
         $checkout_session = Session::create([
