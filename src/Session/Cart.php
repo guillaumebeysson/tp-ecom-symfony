@@ -2,15 +2,18 @@
 
 namespace App\Session;
 
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Cart {
 
     // 1 création de ma session
     private $session;
+    private $repo;
 
-    public function __construct(SessionInterface $session) {
+    public function __construct(SessionInterface $session, ProductRepository $repo) {
         $this->session = $session;
+        $this->repo = $repo;
     }
 
     
@@ -66,8 +69,8 @@ class Cart {
     public function getFullInfoProduct(){
 
         $fullInfoProduct = [];
-            foreach ($cart->get() as $id => $quantity) {
-                $product = $repo->findOneById($id);
+            foreach ($this->get() as $id => $quantity) {
+                $product = $this->repo->findOneById($id);
 
                 //si aucun produit n'existe, continu
                 if(!$product){

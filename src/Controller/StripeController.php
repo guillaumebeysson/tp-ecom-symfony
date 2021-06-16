@@ -18,21 +18,20 @@ class StripeController extends AbstractController
      */
     public function index(Cart $cart): Response
     {
+        $YOUR_DOMAIN = 'http://localhost:8000';
+        $product_stripe = [];
 
         Stripe::setApiKey('sk_test_51J2EBeHaByFbRYAbzr0YEDjy4iEbuk8BJoDlTHhZndBD5nlmudwdzl9sO5FIoK3Vo4MBJ8r8wtvgESNuAxCPm2Ui00EwpJ9Gqi');
 
-        $YOUR_DOMAIN = 'http://localhost:8000';
-
-        $productStripe = [];
-
         foreach ($cart->getFullInfoProduct() as $product) {
-            $productStripe[] = [
+            // j'importe OrderDetails
+            $product_stripe[] = [
                 'price_data' => [
                     'currency' => 'eur',
                     'unit_amount' => $product['product']->getPrice(),
                     'product_data' => [
-                      'name' => $product['product']->getName(),
-                      'images' => $product['product']->getIllustration(),
+                        'name' => $product['product']->getName(),
+                        'images' => ['https://via.placeholder.com/150'],
                     ],
                 ],
                 'quantity' => $product['quantity'],
@@ -40,11 +39,11 @@ class StripeController extends AbstractController
         }
 
         $checkout_session = Session::create([
-        'payment_method_types' => ['card'],
-        'line_items' => [$productStripe],
-        'mode' => 'payment',
-        'success_url' => $YOUR_DOMAIN . '/success.html',
-        'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+            'payment_method_types' => ['card'],
+            'line_items' => [$product_stripe],
+            'mode' => 'payment',
+            'success_url' => $YOUR_DOMAIN . '/success.html',
+            'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
         ]);
 
         return new JsonResponse(['id' => $checkout_session->id]);
